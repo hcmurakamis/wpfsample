@@ -96,7 +96,17 @@ namespace WpfApp1
             {
                 // ドロップされた画像を取得
                 // TargetImageのSourceプロパティに設定
-                GarbageBucket.Items.Add(e.Data.GetData(DataFormats.Bitmap));
+                var items = ImageList.SelectedItems;
+
+                foreach (var item in items)
+                {
+                    // object to Image
+                    Image image = (Image)item;
+
+                    GarbageBucket.Items.Add(image.Source);
+                }
+
+
             }
         }
     }

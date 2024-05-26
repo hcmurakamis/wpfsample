@@ -27,26 +27,47 @@
         <Button Grid.Column="1" Grid.Row="0" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="40">
             <StackPanel Orientation="Horizontal" Margin="4,2">
-                <Image Source="./Resources/user.png" Width="30" Height="30" />
+                <Image Source="./Resources/recycle.png" Width="30" Height="30" />
                 <Label Content="ユーザー" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </StackPanel>
         </Button>
 
         <Border Grid.Column="0" Grid.Row="1" >
-            
-        </Border>
-        <Image Source="./Resources/user.png" Width="30" Height="30" 
-               AllowDrop="True" MouseLeftButtonDown="img2_MouseLeftButtonDown" 
-               Grid.Column="1" Grid.Row="1" 
-                Drop="FileListBox_Drop"
-                DragOver="FileListBox_DragOver"/>
-
-
-        <Image x:Name="SourceImage" Width="200" Height="200" Margin="10" 
-               Source="./Resources/user.png" Grid.Column="0" Grid.Row="2"
+            <Image x:Name="SourceImage" Width="200" Height="200" Margin="10" 
+               Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove"/>
+        </Border>
+        <Image x:Name="SourceImage2" Width="200" Height="200" Margin="10" 
+               Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
+               MouseMove="SourceImage_MouseMove"/>
+
+
+        <ListBox Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight" 
+                 x:Name="ImageList" Margin="10" SelectionMode="Multiple">
+            <Image x:Name="SourceImage10"  Margin="10" Height="50" Width="50"
+                Grid.Column="0" Grid.Row="2"
+               MouseMove="SourceImage_MouseMove">
+                <Image.Source>
+                    <BitmapImage UriSource="./Resources/card.png"/>
+                </Image.Source>
+            </Image>
+            <Image x:Name="SourceImage11"  Margin="10"  Height="50" Width="50"
+               Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
+               MouseMove="SourceImage_MouseMove"/>
+            <Image x:Name="SourceImage12"  Margin="10"  Height="50" Width="50"
+               Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
+               MouseMove="SourceImage_MouseMove"/>
+            <Image x:Name="SourceImage13"  Margin="10"  Height="50" Width="50"
+               Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
+               MouseMove="SourceImage_MouseMove"/>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
         <Image x:Name="TargetImage" Width="200" Height="200" Margin="10,0,0,0" 
-               HorizontalAlignment="Right" AllowDrop="True" Source="./Resources/user.png"
+               HorizontalAlignment="Right" AllowDrop="True" Source="./Resources/recycle.png"
                Drop="TargetImage_Drop"  Grid.Column="1" Grid.Row="2"
                DragOver="TargetImage_DragOver"/>
     </Grid>
