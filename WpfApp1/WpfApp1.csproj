@@ -9,11 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\file.png" />
+    <None Remove="Icons\folder.png" />
     <None Remove="Resources\card.png" />
     <None Remove="Resources\recycle.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WpfLibrary1\WpfLibrary1.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\file.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\card.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

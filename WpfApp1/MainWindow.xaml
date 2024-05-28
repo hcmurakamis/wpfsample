@@ -1,14 +1,25 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:WpfLibrary1="clr-namespace:WpfLibrary1;assembly=WpfLibrary1" x:Class="WpfApp1.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
+    <Window.Resources>
+        <!-- TreeViewItemのテンプレート -->
+        <HierarchicalDataTemplate x:Key="TreeViewItemTemplate" ItemsSource="{Binding Children}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Icon}" Width="16" Height="16" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Name}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
     <Grid Background="#16FFC6C6">
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
@@ -21,9 +32,7 @@
 
         <ListBox Grid.Column="0" Grid.Row="0" 
                 x:Name="GarbageBucket" Margin="10"
-               >
-
-        </ListBox>
+               />
         <Button Grid.Column="1" Grid.Row="0" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="40">
             <StackPanel Orientation="Horizontal" Margin="4,2">
@@ -31,6 +40,9 @@
                 <Label Content="ユーザー" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </StackPanel>
         </Button>
+
+        <TreeView x:Name="TreeViewControl" Grid.Column="2" Grid.Row="0"
+                  ItemTemplate="{StaticResource TreeViewItemTemplate}"/>
 
         <Border Grid.Column="0" Grid.Row="1" >
             <Image x:Name="SourceImage" Width="200" Height="200" Margin="10" 
@@ -44,6 +56,11 @@
 
         <ListBox Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight" 
                  x:Name="ImageList" Margin="10" SelectionMode="Multiple">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <Image x:Name="SourceImage10"  Margin="10" Height="50" Width="50"
                 Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove">
@@ -60,15 +77,13 @@
             <Image x:Name="SourceImage13"  Margin="10"  Height="50" Width="50"
                Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove"/>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
         </ListBox>
         <Image x:Name="TargetImage" Width="200" Height="200" Margin="10,0,0,0" 
                HorizontalAlignment="Right" AllowDrop="True" Source="./Resources/recycle.png"
                Drop="TargetImage_Drop"  Grid.Column="1" Grid.Row="2"
                DragOver="TargetImage_DragOver"/>
+        <WpfLibrary1:MediaPlayer Grid.Column="2" HorizontalAlignment="Left" 
+                                 Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" 
+                                 Height="140" Source="test.mp4" Thumb2="thumb.png"/>
     </Grid>
 </Window>

@@ -18,13 +18,45 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         //private ObservableCollection<string> FileList;
-
+        public class TreeNode
+        {
+            public string Name { get; set; }
+            public string Icon { get; set; }
+            public ObservableCollection<TreeNode> Children { get; set; }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
             //FileList = new ObservableCollection<string>();
             //GarbageBucket.ItemsSource = FileList;
+
+            // データモデルを作成
+            var rootItems = new ObservableCollection<TreeNode>
+            {
+                new TreeNode
+                {
+                    Name = "Root 1",
+                    Icon = "Icons/folder.png",
+                    Children = new ObservableCollection<TreeNode>
+                    {
+                        new TreeNode { Name = "Child 1.1", Icon = "Icons/file.png" },
+                        new TreeNode { Name = "Child 1.2", Icon = "Icons/file.png" }
+                    }
+                },
+                new TreeNode
+                {
+                    Name = "Root 2",
+                    Icon = "Icons/folder.png",
+                    Children = new ObservableCollection<TreeNode>
+                    {
+                        new TreeNode { Name = "Child 2.1", Icon = "Icons/file.png" }
+                    }
+                }
+            };
+
+            // TreeViewにデータをバインド
+            TreeViewControl.ItemsSource = rootItems;
         }
 
         private void FileListBox_Drop(object sender, DragEventArgs e)
