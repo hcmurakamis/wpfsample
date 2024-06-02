@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using LibVLCSharp.Shared;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Numerics;
+using System.Reflection.Emit;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,9 +29,33 @@ namespace WpfApp1
             public ObservableCollection<TreeNode> Children { get; set; }
         }
 
+        private Media media1;
+
+        // HLS Create by ffmpeg
+        // ffmpeg -i s2.mp4 -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls output2.m3u8
+        // VIdeo Downloaded by https://github.com/intel-iot-devkit/sample-videos/tree/master
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            vlcControl.MediaPlayer = new LibVLCSharp.Shared.MediaPlayer(new LibVLC());
+            var mediaOptions = new string[]
+            {
+                ":network-caching=1000",
+                ":clock-jitter=0",
+                ":clock-synchro=0"
+            };
+
+            string FileName = "video/output2.m3u8";
+            FileInfo MediaSource1 = new FileInfo(System.IO.Path.Combine(new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName, FileName));
+            media1 = new Media(new LibVLC(), MediaSource1.FullName);
+            vlcControl.MediaPlayer.Play(media1);
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            //Core.Initialize();
+
             //FileList = new ObservableCollection<string>();
             //GarbageBucket.ItemsSource = FileList;
 
@@ -57,6 +85,11 @@ namespace WpfApp1
 
             // TreeViewにデータをバインド
             TreeViewControl.ItemsSource = rootItems;
+        }
+
+        public void vlcclick(object sender, EventArgs e)
+        {
+            vlcControl.MediaPlayer.Play(media1);
         }
 
         private void FileListBox_Drop(object sender, DragEventArgs e)

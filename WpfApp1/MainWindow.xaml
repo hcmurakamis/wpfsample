@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:WpfLibrary1="clr-namespace:WpfLibrary1;assembly=WpfLibrary1" x:Class="WpfApp1.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        xmlns:vlc="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
+        Title="MainWindow" Height="600" Width="800"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <!-- TreeViewItemのテンプレート -->
         <HierarchicalDataTemplate x:Key="TreeViewItemTemplate" ItemsSource="{Binding Children}">
@@ -16,74 +18,108 @@
             </StackPanel>
         </HierarchicalDataTemplate>
     </Window.Resources>
-    <Grid Background="#16FFC6C6">
+    <Grid >
+        <TabControl>
+            <TabItem Header="Tab1" Style="{StaticResource SampleItem1}" >
+                <Grid Background="#16FFC6C6">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="300"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="200"/>
-        </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="200"/>
+                    </Grid.RowDefinitions>
 
 
-        <ListBox Grid.Column="0" Grid.Row="0" 
+                    <ListBox Grid.Column="0" Grid.Row="0" 
                 x:Name="GarbageBucket" Margin="10"
                />
-        <Button Grid.Column="1" Grid.Row="0" 
+                    <Button Grid.Column="1" Grid.Row="0" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="40">
-            <StackPanel Orientation="Horizontal" Margin="4,2">
-                <Image Source="./Resources/recycle.png" Width="30" Height="30" />
-                <Label Content="ユーザー" VerticalAlignment="Center" Margin="10,0,0,0"/>
-            </StackPanel>
-        </Button>
+                        <StackPanel Orientation="Horizontal" Margin="4,2">
+                            <Image Source="./Resources/recycle.png" Width="30" Height="30" />
+                            <Label Content="ユーザー" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button>
 
-        <TreeView x:Name="TreeViewControl" Grid.Column="2" Grid.Row="0"
+                    <TreeView x:Name="TreeViewControl" Grid.Column="2" Grid.Row="0"
                   ItemTemplate="{StaticResource TreeViewItemTemplate}"/>
 
-        <Border Grid.Column="0" Grid.Row="1" >
-            <Image x:Name="SourceImage" Width="200" Height="200" Margin="10" 
+                    <Border Grid.Column="0" Grid.Row="1" >
+                        <Image x:Name="SourceImage" Width="200" Height="200" Margin="10" 
                Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove"/>
-        </Border>
-        <Image x:Name="SourceImage2" Width="200" Height="200" Margin="10" 
+                    </Border>
+                    <Image x:Name="SourceImage2" Width="200" Height="200" Margin="10" 
                Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove"/>
 
 
-        <ListBox Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight" 
+                    <ListBox Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight" 
                  x:Name="ImageList" Margin="10" SelectionMode="Multiple">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <Image x:Name="SourceImage10"  Margin="10" Height="50" Width="50"
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <Image x:Name="SourceImage10"  Margin="10" Height="50" Width="50"
                 Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove">
-                <Image.Source>
-                    <BitmapImage UriSource="./Resources/card.png"/>
-                </Image.Source>
-            </Image>
-            <Image x:Name="SourceImage11"  Margin="10"  Height="50" Width="50"
+                            <Image.Source>
+                                <BitmapImage UriSource="./Resources/card.png"/>
+                            </Image.Source>
+                        </Image>
+                        <Image x:Name="SourceImage11"  Margin="10"  Height="50" Width="50"
                Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove"/>
-            <Image x:Name="SourceImage12"  Margin="10"  Height="50" Width="50"
+                        <Image x:Name="SourceImage12"  Margin="10"  Height="50" Width="50"
                Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove"/>
-            <Image x:Name="SourceImage13"  Margin="10"  Height="50" Width="50"
+                        <Image x:Name="SourceImage13"  Margin="10"  Height="50" Width="50"
                Source="./Resources/card.png" Grid.Column="0" Grid.Row="2"
                MouseMove="SourceImage_MouseMove"/>
-        </ListBox>
-        <Image x:Name="TargetImage" Width="200" Height="200" Margin="10,0,0,0" 
-               HorizontalAlignment="Right" AllowDrop="True" Source="./Resources/recycle.png"
-               Drop="TargetImage_Drop"  Grid.Column="1" Grid.Row="2"
-               DragOver="TargetImage_DragOver"/>
-        <WpfLibrary1:MediaPlayer Grid.Column="2" HorizontalAlignment="Left" 
-                                 Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" 
+                    </ListBox>
+                    <Grid Background="#16FFC6C6" Grid.Column="2" Grid.Row="1" >
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <vlc:VideoView x:Name="vlcControl"  Grid.Column="0" Grid.Row="0"
+                                   HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" >
+
+                        </vlc:VideoView>
+                        <Button Content="Button" VerticalAlignment="Top"
+                                Click="vlcclick" Grid.Column="0" Grid.Row="1"
+                                Width="100" />
+                    </Grid>
+
+                    <WpfLibrary1:MediaPlayer Grid.Column="2" HorizontalAlignment="Left" 
+                                 Margin="10,50,0,0" Grid.Row="2" VerticalAlignment="Top" 
                                  Height="140" Source="test.mp4" Thumb2="thumb.png"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Tab2">
+                <TextBlock Text="Tab2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </TabItem>
+            <TabItem Header="Tab3">
+                <TextBlock Text="Tab3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </TabItem>
+            <TabItem Header="Tab4">
+                <TextBlock Text="Tab4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </TabItem>
+        </TabControl>
     </Grid>
+    
+    
+    
+
 </Window>
