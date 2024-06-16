@@ -13,7 +13,7 @@ namespace WpfLibrary1
 {
     public class MediaPlayerViewModel : INotifyPropertyChanged
     {
-        private Uri _thumb;
+        private Uri? _thumb;
 
         public Uri Thumb
         {
@@ -29,22 +29,22 @@ namespace WpfLibrary1
         }
 
 
-        private Uri _source2;
+        private Uri? _source;
 
-        public Uri Source2
+        public Uri Source
         {
-            get => _source2;
+            get => _source;
             set
             {
-                if (_source2 != value)
+                if (_source != value)
                 {
-                    _source2 = value;
-                    OnPropertyChanged(nameof(Source2));
+                    _source = value;
+                    OnPropertyChanged(nameof(Source));
                 }
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

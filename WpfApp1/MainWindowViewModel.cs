@@ -16,8 +16,8 @@ namespace WpfApp1
         {
             VideoItems = new ObservableCollection<MediaPlayerViewModel>
             {
-                new MediaPlayerViewModel{Source2=new Uri("test1.mp4", UriKind.Relative), Thumb=new Uri("Icons/file.png", UriKind.Relative) },
-                new MediaPlayerViewModel{Source2=new Uri("test2.mp4", UriKind.Relative), Thumb=new Uri("Icons/folder.png", UriKind.Relative) },
+                new MediaPlayerViewModel{Source=new Uri("test1.mp4", UriKind.Relative), Thumb=new Uri("Icons/file.png", UriKind.Relative) },
+                new MediaPlayerViewModel{Source=new Uri("test2.mp4", UriKind.Relative), Thumb=new Uri("Icons/folder.png", UriKind.Relative) },
 
             };
 

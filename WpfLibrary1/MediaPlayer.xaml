@@ -12,12 +12,13 @@
     <UserControl.Resources>
         <Storyboard x:Key="TimelineStory" Name="TimelineStory" SlipBehavior="Slip">
             <MediaTimeline Name="Timeline"
-                           Source="{Binding Source2}"
+                           Source="{Binding Source}"
                            Storyboard.TargetName="Media"
                            BeginTime="{Binding ElementName=Media, Path=Position}"
                            Duration="{Binding ElementName=Media, Path=NaturalDuration}"
                            CurrentTimeInvalidated="MediaTimeline_CurrentTimeInvalidated"/>
         </Storyboard>
+        <local:StringToUriConverter x:Key="stringToUriConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -25,27 +26,25 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
+
             </Grid.RowDefinitions>
 
-            <MediaElement Name="Media" 
+            <MediaElement Name="Media" Visibility="Hidden" Grid.Row="0"
                   ScrubbingEnabled="True"
                   Loaded="Media_Loaded"
                   MediaOpened="Media_MediaOpened"
                   MediaEnded="Media_MediaEnded"
                   PreviewMouseLeftButtonDown="Media_PreviewMouseLeftButtonDown"/>
 
-            <Image Grid.Row="0" Source="{Binding Thumb}"></Image>
-            <Label Grid.Row="1" Content="{Binding Thumb}" />
-            <Label Grid.Row="2" Content="{Binding Source2}" />
-
+            <Image Grid.Row="0" Source="{Binding ElementName=aaaaa, Path=Content, Converter={StaticResource stringToUriConverter}}"/>
         </Grid>
 
         <Slider Name="SeekSlider" Grid.Row="1" Margin="5"
@@ -59,6 +58,7 @@
             <Button Name="StopButton" Content="Stop" Margin="5" Click="StopButton_Click" Focusable="False"/>
             <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=Volume}"/>
         </StackPanel>
-
+        <Label x:Name="aaaaa" Grid.Row="1" Content="{Binding Thumb}" Visibility="Collapsed" />
+        <Label Grid.Row="2" Content="{Binding Source}" Visibility="Collapsed"/>
     </Grid>
 </UserControl>

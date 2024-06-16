@@ -15,8 +15,6 @@ namespace WpfLibrary1
     /// </summary>
     public partial class MediaPlayer : UserControl
     {
-
-
         #region Properties
 
         protected Storyboard TimelineStory
@@ -40,23 +38,23 @@ namespace WpfLibrary1
         }
 
 
-        public static readonly DependencyProperty ThumbProperty =
-            DependencyProperty.Register("OuterThumb", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(null));
+        //public static readonly DependencyProperty ThumbProperty =
+        //    DependencyProperty.Register("OuterThumb", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("OuterSource", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(null));
+        //public static readonly DependencyProperty SourceProperty =
+        //    DependencyProperty.Register("OuterSource", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(null));
 
-        public Uri OuterThumb
-        {
-            get => (Uri)GetValue(ThumbProperty);
-            set => SetValue(ThumbProperty, value);
-        }
+        //public Uri OuterThumb
+        //{
+        //    get => (Uri)GetValue(ThumbProperty);
+        //    set => SetValue(ThumbProperty, value);
+        //}
 
-        public Uri OuterSource
-        {
-            get => (Uri)GetValue(SourceProperty);
-            set => SetValue(SourceProperty, value);
-        }
+        //public Uri OuterSource
+        //{
+        //    get => (Uri)GetValue(SourceProperty);
+        //    set => SetValue(SourceProperty, value);
+        //}
         #endregion
 
         public MediaPlayerViewModel ViewModel { get; set; }
@@ -68,6 +66,7 @@ namespace WpfLibrary1
             InitializeComponent();
             //ViewModel = new MediaPlayerViewModel();
             //this.DataContext = ViewModel;
+            //this.DataContext = this;
         }
 
         #endregion
@@ -110,9 +109,9 @@ namespace WpfLibrary1
         private void Media_Loaded(object sender, RoutedEventArgs e)
         {
             // 初期設定
-            //ViewModel.Source2 = new Uri("test1.mp4", UriKind.Relative); // 初期ソースを設定
+            //ViewModel.Source = new Uri("test1.mp4", UriKind.Relative); // 初期ソースを設定
             //ViewModel.Thumb = new Uri("file.png", UriKind.Relative); ; // 初期ソースを設定
-            //ViewModel.Source2 = OuterThumb; // 初期ソースを設定
+            //ViewModel.Source = OuterThumb; // 初期ソースを設定
             //ViewModel.Thumb = OuterSource; // 初期ソースを設定
 
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
@@ -187,6 +186,7 @@ namespace WpfLibrary1
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
+            Media.Visibility = Visibility.Visible;
             this.Play();
         }
 

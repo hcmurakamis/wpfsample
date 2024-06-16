@@ -74,7 +74,7 @@ namespace WpfApp1
                     Icon = "Icons/folder.png",
                     Children = new ObservableCollection<TreeNode>
                     {
-                        new TreeNode { Name = "Child 1.1", Icon = "Icons/file.png" },
+                        new TreeNode { Name = "Child 1.1", Icon = "thumb.png" },
                         new TreeNode { Name = "Child 1.2", Icon = "Icons/file.png" }
                     }
                 },
@@ -94,14 +94,14 @@ namespace WpfApp1
 
             var videoItems = new ObservableCollection<MediaPlayerViewModel>
             {
-                new MediaPlayerViewModel{Source2=new Uri("test1.mp4", UriKind.Relative), Thumb=new Uri("Icons/file.png", UriKind.Relative) },
-                new MediaPlayerViewModel{Source2=new Uri("test2.mp4", UriKind.Relative), Thumb=new Uri("Icons/folder.png", UriKind.Relative) },
+                new MediaPlayerViewModel{Source=new Uri("test1.mp4", UriKind.Relative), Thumb=new Uri("thumb.png", UriKind.Relative) },
+                new MediaPlayerViewModel{Source=new Uri("test2.mp4", UriKind.Relative), Thumb=new Uri("Icons/folder.png", UriKind.Relative) },
 
             };
 
 
-            this.DataContext = videoItems;
-
+            //this.DataContext = videoItems;
+            this.DataContext = new MainWindowViewModel();
         }
 
         public void vlcclick(object sender, EventArgs e)

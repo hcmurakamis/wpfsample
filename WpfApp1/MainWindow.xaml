@@ -18,8 +18,6 @@
                 <TextBlock Text="{Binding Name}"/>
             </StackPanel>
         </HierarchicalDataTemplate>
-
-        <local:StringToUriConverter x:Key="stringToUriConverter"/>
     </Window.Resources>
     <Grid >
         <TabControl>
@@ -40,7 +38,7 @@
 
                     <ListBox Grid.Column="0" Grid.Row="0" FlowDirection="LeftToRight" 
                           x:Name="ImageList" Margin="10" SelectionMode="Multiple"
-                             ItemsSource="{Binding }">
+                             ItemsSource="{Binding VideoItems}">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
@@ -57,9 +55,9 @@
                     </ListBox>
                     <StackPanel Orientation="Horizontal" Margin="4,2" Grid.Column="1" Grid.Row="0" >
 
-                            <WpfLibrary1:MediaPlayer Grid.Column="0" HorizontalAlignment="Left" 
+                            <!--<WpfLibrary1:MediaPlayer Grid.Column="0" HorizontalAlignment="Left" 
                                 Grid.Row="0" VerticalAlignment="Top" 
-                                Height="150" Width="200"/>
+                                Height="150" Width="200"/>-->
                             <Label Grid.Row="1" Content="Icons/file.png" />
 
                     </StackPanel>
