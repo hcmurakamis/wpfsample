@@ -13,21 +13,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfLibrary1;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WpfApp1
 {
+    public class TreeNode
+    {
+        public string Name { get; set; }
+        public string Icon { get; set; }
+        public ObservableCollection<TreeNode> Children { get; set; }
+    }
+
+    public class VideoInfo
+    {
+        public Uri Src { get; set; }
+        public Uri Thu { get; set; }
+
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private ObservableCollection<string> FileList;
-        public class TreeNode
-        {
-            public string Name { get; set; }
-            public string Icon { get; set; }
-            public ObservableCollection<TreeNode> Children { get; set; }
-        }
 
         private Media media1;
 
@@ -49,15 +58,12 @@ namespace WpfApp1
             FileInfo MediaSource1 = new FileInfo(System.IO.Path.Combine(new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName, FileName));
             media1 = new Media(new LibVLC(), MediaSource1.FullName);
             vlcControl.MediaPlayer.Play(media1);
+
         }
 
         public MainWindow()
         {
             InitializeComponent();
-            //Core.Initialize();
-
-            //FileList = new ObservableCollection<string>();
-            //GarbageBucket.ItemsSource = FileList;
 
             // データモデルを作成
             var rootItems = new ObservableCollection<TreeNode>
@@ -85,6 +91,17 @@ namespace WpfApp1
 
             // TreeViewにデータをバインド
             TreeViewControl.ItemsSource = rootItems;
+
+            var videoItems = new ObservableCollection<MediaPlayerViewModel>
+            {
+                new MediaPlayerViewModel{Source2=new Uri("test1.mp4", UriKind.Relative), Thumb=new Uri("Icons/file.png", UriKind.Relative) },
+                new MediaPlayerViewModel{Source2=new Uri("test2.mp4", UriKind.Relative), Thumb=new Uri("Icons/folder.png", UriKind.Relative) },
+
+            };
+
+
+            this.DataContext = videoItems;
+
         }
 
         public void vlcclick(object sender, EventArgs e)
@@ -119,9 +136,9 @@ namespace WpfApp1
 
         private void img2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Image image = e.Source as Image;
-            DataObject data = new DataObject(typeof(ImageSource), image.Source);
-            DragDrop.DoDragDrop(image, data, DragDropEffects.All);
+            //Image image = e.Source as Image;
+            //DataObject data = new DataObject(typeof(ImageSource), image.Source);
+            //DragDrop.DoDragDrop(image, data, DragDropEffects.All);
         }
 
         private void SourceImage_MouseMove(object sender, MouseEventArgs e)
@@ -163,16 +180,21 @@ namespace WpfApp1
                 // TargetImageのSourceプロパティに設定
                 var items = ImageList.SelectedItems;
 
-                foreach (var item in items)
-                {
-                    // object to Image
-                    Image image = (Image)item;
+                //foreach (var item in items)
+                //{
+                //    // object to Image
+                //    Image image = (Image)item;
 
-                    GarbageBucket.Items.Add(image.Source);
-                }
+                //    //GarbageBucket.Items.Add(image.Source);
+                //}
 
 
             }
+        }
+
+        private void MediaPlayer_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
         }
     }
 }

@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfLibrary1"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             PreviewKeyDown="UserControl_PreviewKeyDown">
+             d:DesignHeight="150" d:DesignWidth="200"
+             PreviewKeyDown="UserControl_PreviewKeyDown"
+             >
 
     <UserControl.Resources>
         <Storyboard x:Key="TimelineStory" Name="TimelineStory" SlipBehavior="Slip">
             <MediaTimeline Name="Timeline"
-                           Source="{Binding Source}"
+                           Source="{Binding Source2}"
                            Storyboard.TargetName="Media"
                            BeginTime="{Binding ElementName=Media, Path=Position}"
                            Duration="{Binding ElementName=Media, Path=NaturalDuration}"
@@ -26,19 +27,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Grid.Row="0" >
             <Grid.RowDefinitions>
-
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <MediaElement Name="Media" Visibility="Hidden"
+            <MediaElement Name="Media" 
                   ScrubbingEnabled="True"
                   Loaded="Media_Loaded"
                   MediaOpened="Media_MediaOpened"
                   MediaEnded="Media_MediaEnded"
                   PreviewMouseLeftButtonDown="Media_PreviewMouseLeftButtonDown"/>
 
-            <Image Source="{Binding Thumb2}"></Image>
+            <Image Grid.Row="0" Source="{Binding Thumb}"></Image>
+            <Label Grid.Row="1" Content="{Binding Thumb}" />
+            <Label Grid.Row="2" Content="{Binding Source2}" />
 
         </Grid>
 

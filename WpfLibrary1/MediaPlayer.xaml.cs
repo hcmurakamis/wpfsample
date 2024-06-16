@@ -7,50 +7,15 @@ using System.Windows.Media.Animation;
 
 namespace WpfLibrary1
 {
+
+
     /// <summary>
     /// MediaPlayer.xaml の相互作用ロジック
     /// https://qiita.com/jakucho0926/items/d2d71080bd1f5c39495a
     /// </summary>
     public partial class MediaPlayer : UserControl
     {
-        public static readonly DependencyProperty Thumb2Property =
-        DependencyProperty.Register(
-            nameof(Thumb2),         // プロパティ名
-            typeof(String), // バインドするデータの型
-            typeof(MediaPlayer),  // 自分自身の型
-            new PropertyMetadata(  // 初期値をPropertyMetadata経由でつっこむ
-                new String(""))
-        );
 
-        public String Thumb2
-        {
-            get => (String)GetValue(Thumb2Property);
-            set => SetValue(Thumb2Property, value);
-        }
-
-
-
-
-
-        public static readonly DependencyProperty ThumbProperty = 
-            DependencyProperty.Register("Thumb", typeof(Uri), 
-                typeof(MediaPlayer), new PropertyMetadata(null));
-        public Uri Thumb
-        {
-            get { return (Uri)GetValue(ThumbProperty); }
-            set { SetValue(ThumbProperty, value); }
-        }
-
-        #region Dependency Properties
-
-        public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(null));
-        public Uri Source
-        {
-            get { return (Uri)GetValue(SourceProperty); }
-            set { SetValue(SourceProperty, value); }
-        }
-
-        #endregion
 
         #region Properties
 
@@ -74,14 +39,35 @@ namespace WpfLibrary1
             get { return this.Media.Clock == null || this.Media.Clock.CurrentState.HasFlag(ClockState.Stopped); }
         }
 
+
+        public static readonly DependencyProperty ThumbProperty =
+            DependencyProperty.Register("OuterThumb", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register("OuterSource", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(null));
+
+        public Uri OuterThumb
+        {
+            get => (Uri)GetValue(ThumbProperty);
+            set => SetValue(ThumbProperty, value);
+        }
+
+        public Uri OuterSource
+        {
+            get => (Uri)GetValue(SourceProperty);
+            set => SetValue(SourceProperty, value);
+        }
         #endregion
+
+        public MediaPlayerViewModel ViewModel { get; set; }
 
         #region Constructors
 
         public MediaPlayer()
         {
             InitializeComponent();
-            DataContext = this;
+            //ViewModel = new MediaPlayerViewModel();
+            //this.DataContext = ViewModel;
         }
 
         #endregion
@@ -123,6 +109,12 @@ namespace WpfLibrary1
 
         private void Media_Loaded(object sender, RoutedEventArgs e)
         {
+            // 初期設定
+            //ViewModel.Source2 = new Uri("test1.mp4", UriKind.Relative); // 初期ソースを設定
+            //ViewModel.Thumb = new Uri("file.png", UriKind.Relative); ; // 初期ソースを設定
+            //ViewModel.Source2 = OuterThumb; // 初期ソースを設定
+            //ViewModel.Thumb = OuterSource; // 初期ソースを設定
+
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 return;

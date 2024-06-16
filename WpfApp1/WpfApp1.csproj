@@ -13,7 +13,10 @@
     <None Remove="Icons\folder.png" />
     <None Remove="Resources\card.png" />
     <None Remove="Resources\recycle.png" />
-    <None Remove="test.mp4" />
+    <None Remove="test1.mp4" />
+    <None Remove="test2.mp4" />
+    <None Remove="test3.mp4" />
+    <None Remove="test4.mp4" />
     <None Remove="thumb.png" />
     <None Remove="video\output2.m3u8" />
     <None Remove="video\output20.ts" />
@@ -22,7 +25,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="test.mp4">
+    <Content Include="test1.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test2.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test3.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test4.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="thumb.png">
