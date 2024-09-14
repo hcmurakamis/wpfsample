@@ -1,6 +1,10 @@
-WpfApp1/obj
-WpfApp1/bin
 .vs
 
+packages
+
+WpfApp1/obj
+WpfApp1/bin
 WpfLibrary1/obj
 WpfLibrary1/bin
+WpfApp2/obj
+WpfApp2/bin

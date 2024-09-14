@@ -1,9 +1,12 @@
 ﻿using LibVLCSharp.Shared;
+
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Numerics;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,8 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Xps.Packaging;
 using WpfLibrary1;
 using static System.Net.Mime.MediaTypeNames;
+
 
 namespace WpfApp1
 {
@@ -35,16 +40,18 @@ namespace WpfApp1
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
 
         private Media media1;
+
+
 
         // HLS Create by ffmpeg
         // ffmpeg -i s2.mp4 -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls output2.m3u8
         // VIdeo Downloaded by https://github.com/intel-iot-devkit/sample-videos/tree/master
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             vlcControl.MediaPlayer = new LibVLCSharp.Shared.MediaPlayer(new LibVLC());
             var mediaOptions = new string[]
@@ -59,7 +66,37 @@ namespace WpfApp1
             media1 = new Media(new LibVLC(), MediaSource1.FullName);
             vlcControl.MediaPlayer.Play(media1);
 
+
+            // 101番目のフレームから再生 MAXFRAME が100の場合は99が最大
+            //capture.PosFrames=101;
+
+            // フレームカウンタ
+            //int cnt = 1;
+            //while (capture.Read(img))
+            //{
+
+            //    Title = capture.Fps.ToString() + "Fps,MAXFrame" + capture.FrameCount.ToString() + "/Frame" + cnt.ToString();
+            //    cnt++;
+
+            //    var x = BitmapSourceConverter.ToBitmapSource(img);
+
+            //    // 開始5秒後を表示
+            //    // capture.PosMsec=5000;
+
+            //    // 保存 
+            //    //using (Stream stream = new FileStream("c:\\test" + cnt + ".jpg", FileMode.Create))
+            //    //{
+            //    //    PngBitmapEncoder encoder = new PngBitmapEncoder();
+            //    //    encoder.Frames.Add(BitmapFrame.Create(x));
+            //    //    encoder.Save(stream);
+            //    //}
+            //    image.Source = x;
+            //    await Task.Delay(10);
+            //}
+            //image.Source = null;
         }
+
+
 
         public MainWindow()
         {
@@ -102,7 +139,11 @@ namespace WpfApp1
 
             //this.DataContext = videoItems;
             this.DataContext = new MainWindowViewModel();
+
+
+
         }
+
 
         public void vlcclick(object sender, EventArgs e)
         {
