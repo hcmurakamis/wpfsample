@@ -47,9 +47,11 @@ namespace WpfApp1
 
 
 
-        // HLS Create by ffmpeg
+        // HLS Created by ffmpeg
         // ffmpeg -i s2.mp4 -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls output2.m3u8
-        // VIdeo Downloaded by https://github.com/intel-iot-devkit/sample-videos/tree/master
+        // Video Downloaded by https://github.com/intel-iot-devkit/sample-videos/tree/master
+        //                     https://video-ac.com/
+        // Also, Audio by      https://otologic.jp/free/se/school_bell01.html
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
