@@ -1,5 +1,5 @@
 # wpfsample
- - What is this
+ - This is?
 	- Sample Application for learning WPF
 	  - Item D&D
 	  - Icon View
